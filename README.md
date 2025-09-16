@@ -17,7 +17,7 @@
 
 **Dead Drop** is a lightweight, portable Windows-based post-exploitation tool designed for **lab environments**, **red team exercises**, and **offline ops**. 
 
-This script allows you to plug in removable media, execute a single script, and silently prepare a backdoor channel via **OpenSSH**, complete with a hidden **administrative user**, firewall exceptions, and startup persistence — all wrapped in a clean, minimalistic, and robust package.
+This script allows you to plug in removable media, execute a single script, and silently prepare a backdoor channel via **OpenSSH**, complete with a hidden **administrative user**, firewall exceptions, and startup persistence
 
 ---
 
@@ -27,9 +27,8 @@ This script allows you to plug in removable media, execute a single script, and 
 - 🔐 Enables & starts **ssh-agent** and **sshd** on boot  
 - 👤 Creates a hidden user account `Shadow` with **admin privileges**  
 - 🚪 Adds **Windows Firewall exception** for **port 22**  
-- 🧾 Logs each step with detailed **status and error checking**  
 - 🔧 Requires **no internet** beyond initial execution  
-- 🧱 Written in **PowerShell** / **Batch** (fully self-contained)
+- 🧱 Written in **PowerShell** (fully self-contained)
 
 ---
 
@@ -50,11 +49,10 @@ This script allows you to plug in removable media, execute a single script, and 
 
 ## 📦 Usage
 
-1. 🧲 Place the `dead_drop.ps1` (or `.bat`) script on removable media  
+1. 🧲 Place the `dead_drop.ps1` script on removable media  
 2. 💻 Plug into the target Windows machine  
 3. 🧨 Launch the script manually with **Administrator privileges**  
 4. ✅ The script will perform the following:
-    - Display a red ASCII banner
     - Install & start OpenSSH services
     - Create hidden admin account `Shadow`
     - Add port 22 to Windows Firewall
