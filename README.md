@@ -72,7 +72,7 @@ This script allows you to plug in removable media, execute a single script, and 
 
 ## 🧪 Screenshot / Demo (Optional)
 
-*You can place a screenshot here of the ASCII art + output log in a CMD window.*
+*Coming Soon*
 
 ---
 
