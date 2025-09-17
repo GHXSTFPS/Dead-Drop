@@ -13,63 +13,91 @@
 
 ---
 
-🧨 Dead Drop
+<h1 align="center">🧨 Dead Drop</h1>
 
-Dead Drop is a lightweight, portable post-exploitation tool for Windows, designed for red team exercises, lab environments, and offline operations.
+<p align="center">
+  <b>Red Team Backdoor Toolkit</b><br>
+  <i>Lightweight. Portable. Stealthy.</i>
+</p>
 
-This PowerShell-based script enables you to insert removable media, execute a single script, and silently establish a backdoor channel via OpenSSH, complete with:
+<p align="center">
+  <img src="https://img.shields.io/badge/status-active-red?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/platform-windows-black?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/built_with-powershell-white?style=for-the-badge&logo=powershell" />
+</p>
 
-A hidden administrative user
+---
 
-Firewall exceptions
+## ⚙️ Features
 
-Startup persistence
+- ✔️ Installs **OpenSSH Client and Server** (if missing)
+- ✔️ Enables and configures `ssh-agent` and `sshd` on boot
+- ✔️ Creates a **hidden admin user**: `Shadow`
+- ✔️ Adds **firewall exception** for port **22**
+- ✔️ Requires **no internet** after first execution
+- ✔️ Fully **self-contained PowerShell script**
 
-⚙️ Features
+---
 
-✔️ Checks and installs OpenSSH Client and Server
+## 🚨 Intended Use
 
-✔️ Enables & configures ssh-agent and sshd on boot
+> **Dead Drop is intended for ethical, educational, and controlled environments only.**  
+> Use it **with explicit permission**, and **in accordance with all local laws and policies**.
 
-✔️ Creates a hidden admin user: Shadow
+---
 
-✔️ Adds firewall exception for port 22
+## 🧰 Requirements
 
-✔️ Requires no internet after initial execution
+- 🖥️ Windows 10/11 with Administrator access  
+- 💬 PowerShell 5.1+ or CMD  
+- 💾 Removable USB or drive with the script stored
 
-✔️ Written entirely in PowerShell (self-contained)
+---
 
-🚨 Intended Use
+## 📦 Usage
 
-Dead Drop is for ethical, educational, and controlled environments only.
-Use with explicit permission and in accordance with local laws and organizational policies.
+<details>
+<summary><b>Click to expand detailed usage instructions</b></summary><br>
 
-🧰 Requirements
+1. Copy `dead_drop.ps1` to a removable USB drive  
+2. Plug it into the target machine  
+3. Right-click and run the script as Administrator  
+4. The script will automatically:
+   - Install & start OpenSSH services
+   - Create hidden admin user: `Shadow`
+   - Add port 22 to Windows Firewall
+   - Confirm success at each step  
 
-🖥️ Windows 10/11 with Administrator access
+</details>
 
-💬 PowerShell 5.1+ or CMD
+---
 
-💾 Removable USB/Drive containing dead_drop.ps1
+## 🔐 Example Hidden Account
 
-📦 Usage Guide
+| Username | Password     | Group             |
+|----------|--------------|-------------------|
+| Shadow   | Shadow123!   | Administrators *(Hidden)* |
 
-Copy dead_drop.ps1 to a removable drive
+---
 
-Insert drive into the target Windows system
+## 🧪 Demo / Screenshot
 
-Manually execute the script with Administrator privileges
+> Coming soon...
 
-Script performs the following:
+---
 
-Installs & starts OpenSSH services
+## 🖤 Author & Project Info
 
-Creates hidden admin user: Shadow
+**Author:** GHXSTFPS  
+**Project:** Dead Drop  
+**GitHub:** [github.com/GHXSTFPS/dead-drop](https://github.com/GHXSTFPS/dead-drop)
 
-Adds firewall exception for port 22
+---
 
-Confirms each step during setup
+## ⚖️ Legal Disclaimer
 
-🔐 Example Hidden Account
-Username	Password	Group
-Shadow	Shadow123!	Administrators (Hidden)
+> This project is for **educational purposes only**.  
+> The author assumes **no responsibility for misuse** or unauthorized use.  
+> Use responsibly and within legal boundaries.
+
+---
