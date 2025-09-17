@@ -13,78 +13,63 @@
 
 ---
 
-## 🧨 Dead Drop
+🧨 Dead Drop
 
-**Dead Drop** is a lightweight, portable Windows-based post-exploitation tool designed for **lab environments**, **red team exercises**, and **offline ops**. 
+Dead Drop is a lightweight, portable post-exploitation tool for Windows, designed for red team exercises, lab environments, and offline operations.
 
-This script allows you to plug in removable media, execute a single script, and silently prepare a backdoor channel via **OpenSSH**, complete with a hidden **administrative user**, firewall exceptions, and startup persistence
+This PowerShell-based script enables you to insert removable media, execute a single script, and silently establish a backdoor channel via OpenSSH, complete with:
 
----
+A hidden administrative user
 
-## ⚙️ Features
+Firewall exceptions
 
-- 🛡️ Checks and installs **OpenSSH Client** and **Server** on Windows  
-- 🔐 Enables & starts **ssh-agent** and **sshd** on boot  
-- 👤 Creates a hidden user account `Shadow` with **admin privileges**  
-- 🚪 Adds **Windows Firewall exception** for **port 22**  
-- 🔧 Requires **no internet** beyond initial execution  
-- 🧱 Written in **PowerShell** (fully self-contained)
+Startup persistence
 
----
+⚙️ Features
 
-## 🚨 Intended Use
+✔️ Checks and installs OpenSSH Client and Server
 
-> ⚠️ **Dead Drop is intended for ethical, educational, and controlled lab environments only.**  
-> Use it in accordance with your local laws, organizational policies, and with explicit permission.
+✔️ Enables & configures ssh-agent and sshd on boot
 
----
+✔️ Creates a hidden admin user: Shadow
 
-## 🧰 Requirements
+✔️ Adds firewall exception for port 22
 
-- 💻 Windows 10/11 with Administrator access  
-- 🧱 PowerShell 5.1+ or CMD environment  
-- 📦 Removable USB/Drive with the script stored
+✔️ Requires no internet after initial execution
 
----
+✔️ Written entirely in PowerShell (self-contained)
 
-## 📦 Usage
+🚨 Intended Use
 
-1. 🧲 Place the `dead_drop.ps1` script on removable media  
-2. 💻 Plug into the target Windows machine  
-3. 🧨 Launch the script manually with **Administrator privileges**  
-4. ✅ The script will perform the following:
-    - Install & start OpenSSH services
-    - Create hidden admin account `Shadow`
-    - Add port 22 to Windows Firewall
-    - Confirm successful setup at each stage
+Dead Drop is for ethical, educational, and controlled environments only.
+Use with explicit permission and in accordance with local laws and organizational policies.
 
----
+🧰 Requirements
 
-## ❗ Example Hidden Account
+🖥️ Windows 10/11 with Administrator access
 
-| Username | Password    | Group       |
-|----------|-------------|-------------|
-| `Shadow` | `Shadow123!`| Administrators (Hidden) |
+💬 PowerShell 5.1+ or CMD
 
----
+💾 Removable USB/Drive containing dead_drop.ps1
 
-## 🧪 Screenshot / Demo (Optional)
+📦 Usage Guide
 
-*Coming Soon*
+Copy dead_drop.ps1 to a removable drive
 
----
+Insert drive into the target Windows system
 
-## 🖤 Author
+Manually execute the script with Administrator privileges
 
-👤 [GHXSTFPS](https://github.com/GHXSTFPS)  
-🧠 Project: `Dead Drop`  
-📍 GitHub: [github.com/GHXSTFPS/dead-drop](https://github.com/GHXSTFPS)
+Script performs the following:
 
----
+Installs & starts OpenSSH services
 
-## 🔐 Legal Disclaimer
+Creates hidden admin user: Shadow
 
-This project is intended for **educational purposes** only and should **not** be used in any unauthorized environment.  
-The author assumes **no responsibility** for misuse or damage caused.
+Adds firewall exception for port 22
 
----
+Confirms each step during setup
+
+🔐 Example Hidden Account
+Username	Password	Group
+Shadow	Shadow123!	Administrators (Hidden)
