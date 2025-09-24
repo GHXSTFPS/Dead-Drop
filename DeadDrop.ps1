@@ -27,6 +27,23 @@ function Check-Admin {
         exit 1
     }
 }
+function Start-HiddenInstance {
+    param(
+        [string]$ScriptPath = $MyInvocation.MyCommand.Path
+    )
+
+    Write-Host "[*] Relaunching script with hidden window..." -ForegroundColor Cyan
+    Write-Log "Operator requested hidden-window relaunch (consented)."
+
+    # Start a new PowerShell process that runs the same script with a hidden window
+    Start-Process -FilePath "powershell.exe" `
+                  -ArgumentList "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$ScriptPath`"" `
+                  -WindowStyle Hidden
+
+    # Exit the current visible instance so only the hidden one remains
+    Write-Log "Original visible instance exiting after relaunch to hidden instance."
+    exit
+}
 
 function Minimize-Window {
     $vbsPath = "$env:TEMP\minimize.vbs"
