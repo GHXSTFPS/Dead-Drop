@@ -17,7 +17,6 @@
 
 <p align="center">
   <b>Red Team Backdoor Toolkit</b><br>
-  <i>Lightweight. Portable. Stealthy.</i>
 </p>
 
 <p align="center">
